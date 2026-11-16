@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fffaf6"><meta name="description" content="填写双方消费信息，自由选择原图或透明贴纸，生成两张170×170小组件图片。">
+  <title>消费小组件 · 把日常变可爱</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="header"><div class="brand-mark" aria-hidden="true">✦</div><div><h1>消费小组件<span class="tag">体验版</span></h1><p>把今天的消费，变成可爱的小卡片</p></div><button id="reset" class="button quiet">恢复示例</button></header>
+  <main>
+    <nav class="steps" aria-label="使用步骤"><button id="step-one" class="step active" aria-current="step"><b>1</b> 配置内容</button><span class="step-line"></span><button id="step-two" class="step"><b>2</b> 生成图片</button></nav>
+    <section id="configure" aria-label="配置内容">
+      <div class="workspace"><div class="form-column"><div class="section-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>今天，花了点小开心</h2></div><p>先填信息，再选一种喜欢的图片效果。</p></div>
+        <div class="person-tabs" role="tablist" aria-label="编辑对象"><button id="tab-me" role="tab" aria-selected="true" data-person="0">我的信息</button><button id="tab-partner" role="tab" aria-selected="false" data-person="1">对方的信息</button></div>
+        <div id="forms" class="forms"></div>
+        <div class="finish-bar"><p><span aria-hidden="true">✧</span> 两个人，可以选择不同的图片效果</p><button id="generate" class="button primary">生成小组件 <span aria-hidden="true">→</span></button></div>
+      </div><aside class="preview-panel"><div class="preview-heading"><h2>效果预览</h2><span>170 × 170 px / 张</span></div><div class="preview-grid"><div class="preview-item"><h3>我的小组件</h3><canvas id="preview-0" width="680" height="680" role="img" aria-label="我的小组件预览"></canvas><span class="mode-label" id="preview-mode-0">备注图片</span></div><div class="preview-item"><h3>对方的小组件</h3><canvas id="preview-1" width="680" height="680" role="img" aria-label="对方的小组件预览"></canvas><span class="mode-label" id="preview-mode-1">备注图片</span></div></div><p class="preview-note">大一点的商品，少一点装饰。<br>留住照片，也留住今天的小快乐。</p><details class="appearance"><summary>调整贴纸效果</summary><label>白色描边 <input id="outline" type="range" min="0" max="4" step=".5" value="2.5"></label><label class="checkbox"><input id="decoration" type="checkbox" checked> 添加小星星</label></details></aside></div>
+    </section>
+    <section id="results" class="results" hidden><span class="eyebrow">READY TO SAVE</span><h2>今天的小卡片，做好啦</h2><p>每张都是独立的 170 × 170 PNG 图片。</p><div id="result-grid" class="result-grid"></div><div class="result-actions"><button id="back" class="button">← 返回修改</button><button id="share-all" class="button primary">分享两张图片</button></div><p class="save-hint">App 内若无法直接下载，可以点开图片后长按保存，或使用分享。具体保存方式取决于当前浏览器。</p></section>
+    <footer>图片在当前设备处理 · 无需登录 <span> / </span><a href="https://github.com/BOOOER25/spending-widget-generator" target="_blank" rel="noopener">开源代码与许可</a><details><summary>关于免费抠图</summary><p>体验版使用 IMG.LY 开源模型在浏览器中抠图，不上传照片，也不调用图片生成服务。首次使用会下载约 40 MB 模型及运行资源，建议连接 Wi-Fi。速度和效果取决于设备与网络；也支持直接上传已抠好的透明 PNG。切换到其他图片接口后，处理方式会随之改变。</p><a href="https://github.com/imgly/background-removal-js" target="_blank" rel="noopener">IMG.LY 项目 · AGPL-3.0</a></details></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <dialog id="crop-dialog"><form method="dialog"><div class="dialog-heading"><h2>调整图片</h2><button class="icon-button" aria-label="关闭">×</button></div><div class="crop-check"><canvas id="crop-preview" width="680" height="680" aria-label="裁切效果"></canvas></div><label>放大 <input id="crop-zoom" type="range" min="1" max="3" step=".02"></label><label>左右位置 <input id="crop-x" type="range" min="0" max="100"></label><label>上下位置 <input id="crop-y" type="range" min="0" max="100"></label><button class="button primary full">完成调整</button></form></dialog>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
