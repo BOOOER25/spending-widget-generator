@@ -2,46 +2,37 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f8f6f3">
-  <meta name="description" content="切换背景、左组件和右组件，实时制作手机桌面效果，保存高清 PNG。"><title>小组件效果生成</title><link rel="stylesheet" href="./styles.css?v=8">
+  <meta name="description" content="上传手机截图、编辑小组件，按截图原始分辨率保存高清 PNG。"><title>小组件效果生成</title><link rel="stylesheet" href="./styles.css?v=9">
 </head>
 <body>
-  <header class="header"><div><h1>小组件效果生成</h1><p>换背景、改内容，边改边看效果</p></div><button id="reset" type="button" class="text-button">恢复示例</button></header>
+  <header class="header"><div><h1>小组件效果生成</h1><p>上传截图、改内容，边改边看效果</p></div><button id="reset" type="button" class="text-button">恢复示例</button></header>
   <main class="editor-layout">
     <section id="preview-section" class="preview-column" aria-label="桌面效果预览">
-      <div class="preview-heading"><div><span class="eyebrow" id="phone-device-label">手机桌面</span><h2>桌面效果</h2></div><span id="phone-size-label" class="dimensions">正在准备…</span></div>
-      <div id="phone-stage" class="phone-stage"><canvas id="phone-canvas" width="1206" height="2622" role="img" aria-label="手机桌面模拟截图"></canvas><div class="phone-interactions"><button id="phone-hit-0" type="button" class="phone-widget-hit" aria-label="左组件，拖动位置，方向键微调" aria-pressed="false"></button><button id="phone-hit-1" type="button" class="phone-widget-hit" aria-label="右组件，拖动位置，方向键微调" aria-pressed="false"></button></div></div>
+      <div class="preview-heading"><div><span class="eyebrow" id="phone-device-label">手机截图</span><h2>桌面效果</h2></div><span id="phone-size-label" class="dimensions">等待上传截图</span></div>
+      <div id="phone-stage" class="phone-stage empty-preview"><div id="phone-empty" class="phone-empty"><span class="empty-preview-icon" aria-hidden="true">＋</span><strong>上传你的手机截图</strong><p>自动沿用截图分辨率<br>保留原有状态栏与 Dock</p><button id="preview-upload" type="button" class="button">选择截图</button></div><canvas id="phone-canvas" width="1206" height="2622" role="img" aria-label="手机截图与小组件效果" hidden></canvas><div class="phone-interactions" hidden><button id="phone-hit-0" type="button" class="phone-widget-hit" aria-label="左组件，拖动位置，方向键微调" aria-pressed="false"></button><button id="phone-hit-1" type="button" class="phone-widget-hit" aria-label="右组件，拖动位置，方向键微调" aria-pressed="false"></button></div></div>
       <p class="preview-note">按住组件可拖动 · 内容修改后实时更新</p><a id="export-link" class="export-link" target="_blank" rel="noopener" hidden>打开导出原图，长按保存 ↗</a>
     </section>
     <section class="editor-column" aria-label="编辑内容">
-      <nav class="editor-tabs" role="tablist" aria-label="编辑区域"><button id="tab-background" type="button" role="tab" aria-selected="true" aria-controls="panel-background" data-editor-tab="background">背景</button><button id="tab-left" type="button" role="tab" aria-selected="false" aria-controls="panel-left" data-editor-tab="left">左组件</button><button id="tab-right" type="button" role="tab" aria-selected="false" aria-controls="panel-right" data-editor-tab="right">右组件</button></nav>
+      <div class="font-settings"><label for="widget-font">组件字体<select id="widget-font"><option value="system">系统字体（默认 · 无需下载）</option><option value="puhui">阿里普惠体 + Inter（下载约 4.3 MB）</option></select></label><p id="font-status" class="control-note" role="status">使用当前设备的系统字体，打开即可编辑。</p><button id="font-retry" type="button" class="text-button" hidden>重新下载字体</button></div>
+      <nav class="editor-tabs" role="tablist" aria-label="编辑区域"><button id="tab-background" type="button" role="tab" aria-selected="true" aria-controls="panel-background" data-editor-tab="background">截图</button><button id="tab-left" type="button" role="tab" aria-selected="false" aria-controls="panel-left" data-editor-tab="left">左组件</button><button id="tab-right" type="button" role="tab" aria-selected="false" aria-controls="panel-right" data-editor-tab="right">右组件</button></nav>
+      <!-- 机型、壁纸与背景调整暂时停用，原方案保留在 background-panel-legacy.html。 -->
       <div id="panel-background" class="editor-panel" role="tabpanel" aria-labelledby="tab-background">
-        <div class="panel-heading"><div><h2>桌面背景</h2><p>选好机型，换上你喜欢的壁纸或截图</p></div><button id="phone-default-background" type="button" class="text-button">恢复默认</button></div>
-        <label>预设机型<select id="phone-device" aria-label="预设机型"></select></label>
-        <span class="field-label">上传的背景类型</span><div class="segmented" role="group" aria-label="背景类型"><button type="button" data-background-type="wallpaper" aria-pressed="true">纯壁纸</button><button type="button" data-background-type="screenshot" aria-pressed="false">完整手机截图</button></div>
-        <p id="background-help" class="control-note">自动添加所选机型的状态栏、Dock 与底部桌面元素。</p>
-        <button id="phone-upload" type="button" class="background-upload"><span class="upload-symbol">＋</span><strong>上传背景图片</strong><span>JPG、PNG 或 WebP</span></button><input id="phone-background" type="file" accept="image/jpeg,image/png,image/webp" hidden>
-        <p id="phone-upload-status" class="control-note" role="status">正在加载默认壁纸…</p><button id="use-background-size" type="button" class="text-button" hidden>使用截图原始尺寸</button>
-        <div class="background-adjustments" aria-label="背景图片调整">
-          <div class="adjustment-heading"><strong>背景调整</strong><button id="background-adjust-reset" type="button" class="text-button">重置调整</button></div>
-          <label>不透明度 <output id="background-opacity-value">100%</output><input id="background-opacity" type="range" min="0" max="100" value="100" step="1"></label>
-          <label>缩放 <output id="background-zoom-value">100%</output><input id="background-zoom" type="range" min="100" max="300" value="100" step="1"></label>
-          <button id="background-position-mode" type="button" class="button full" aria-pressed="false">调整背景位置</button>
-          <p id="background-position-help" class="control-note">可放大后拖动背景，或展开下方进行微调。透明后透出白色底。</p>
-          <details class="background-position-details"><summary>位置微调</summary><label>水平位置 <output id="background-x-value">50%</output><input id="background-x" type="range" min="0" max="100" value="50" step="1"></label><label>垂直位置 <output id="background-y-value">50%</output><input id="background-y" type="range" min="0" max="100" value="50" step="1"></label></details>
-        </div>
-        <details class="settings-details"><summary>桌面显示设置</summary><div id="desktop-options"><label>状态栏时间<input id="desktop-clock" type="time" value="13:43"></label><label>桌面文字<select id="desktop-color"><option value="auto">自动适配壁纸</option><option value="white">白色</option><option value="dark">深色</option></select></label></div>
+        <div class="panel-heading"><div><h2>上传手机截图</h2><p>使用截图原始分辨率，保留原有桌面内容</p></div></div>
+        <button id="phone-upload" type="button" class="background-upload"><span class="upload-symbol">＋</span><strong>选择手机截图</strong><span>JPG、PNG 或 WebP · 最大 30 MB</span></button><input id="phone-background" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        <p id="phone-upload-status" class="control-note" role="status">还未上传截图，上传后可拖动组件并保存效果图。</p>
+        <details class="settings-details"><summary>组件显示设置</summary>
           <label class="check-line"><input id="phone-snap" type="checkbox" checked> 拖动时吸附网格</label><p class="control-note">组件下方名称固定显示：喵喵记账</p>
           <label>组件圆角 <span id="phone-corner-value">16%</span><input id="phone-corner" type="range" min="0" max="24" step="1" value="16"></label><button id="phone-layout-reset" type="button" class="text-button">恢复两个组件的大小与位置</button>
-        </details><p class="control-note desktop-disclosure">桌面元素按机型风格与比例模拟；完整截图模式直接保留截图内容。</p>
+        </details>
       </div>
       <div id="panel-left" role="tabpanel" aria-labelledby="tab-left" hidden></div><div id="panel-right" role="tabpanel" aria-labelledby="tab-right" hidden></div>
       <button id="jump-preview" type="button" class="button preview-jump">查看桌面效果 ↑</button>
       <footer>图片在当前设备处理 · 无需登录<br><a href="https://github.com/BOOOER25/spending-widget-generator" target="_blank" rel="noopener">开源代码与许可</a><details><summary>关于免费抠图</summary><p>使用 IMG.LY 开源模型在当前设备抠图，首次下载约 40 MB 资源。网络不佳时可重试，或直接上传透明 PNG。用户图片不经过图片生成服务。</p></details></footer>
     </section>
   </main>
-  <div class="save-bar"><div class="save-bar-inner"><label class="save-format"><select id="save-target" aria-label="保存图片类型"><option value="phone">手机效果图</option><option value="left">左组件</option><option value="right">右组件</option></select><span id="save-dimensions">PNG · 正在准备</span></label><button id="save-image" type="button" class="button primary" disabled><span aria-hidden="true">↓</span> 保存图片</button></div></div>
+  <div class="save-bar"><div class="save-bar-inner"><label class="save-format"><select id="save-target" aria-label="保存图片类型"><option value="phone">手机效果图</option><option value="left">左组件</option><option value="right">右组件</option></select><span id="save-dimensions">请先上传手机截图</span></label><button id="save-image" type="button" class="button primary" disabled><span aria-hidden="true">↓</span> 保存图片</button></div></div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <dialog id="crop-dialog"><form method="dialog"><div class="dialog-heading"><h2>调整商品图片</h2><button type="submit" class="icon-button" aria-label="关闭">×</button></div><canvas id="crop-preview" width="680" height="680" aria-label="商品裁切效果"></canvas><label>放大<input id="crop-zoom" type="range" min="1" max="3" step=".02"></label><label>左右位置<input id="crop-x" type="range" min="0" max="100"></label><label>上下位置<input id="crop-y" type="range" min="0" max="100"></label><button type="submit" class="button primary full">完成调整</button></form></dialog>
-  <script type="module" src="./app.js?v=8"></script>
+  <script type="module" src="./app.js?v=9"></script>
 </body>
 </html>
