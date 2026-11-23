@@ -2,11 +2,11 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f8f6f3">
-  <meta name="description" content="上传手机截图、编辑小组件，保存高清 PNG，或制作随消费时间变化的小组件视频。"><title>小组件效果生成</title><link rel="stylesheet" href="./styles.css?v=13">
+  <meta name="description" content="上传手机截图、编辑小组件，保存高清 PNG，或制作随消费时间变化的小组件视频。"><title>小组件效果生成</title><link rel="stylesheet" href="./styles.css?v=14">
 </head>
 <body>
   <header class="header"><div><h1>小组件效果生成</h1><p>上传截图、改内容，边改边看效果</p></div><button id="reset" type="button" class="text-button">恢复示例</button></header>
-  <nav class="mode-nav" aria-label="生成方式"><a href="./?v=13" aria-current="page">图片小组件</a><a href="./video.html?v=13">小组件视频</a></nav>
+  <nav class="mode-nav" aria-label="生成方式"><a href="./?v=14" aria-current="page">图片小组件</a><a href="./video.html?v=14">小组件视频</a></nav>
   <main class="editor-layout">
     <section id="preview-section" class="preview-column" aria-label="桌面效果预览">
       <div class="preview-heading"><div><span class="eyebrow" id="phone-device-label">手机截图</span><h2>桌面效果</h2></div><span id="phone-size-label" class="dimensions">等待上传截图</span></div>
@@ -34,6 +34,6 @@
   <div class="save-bar"><div class="save-bar-inner"><label class="save-format"><select id="save-target" aria-label="保存图片类型"><option value="phone">手机效果图</option><option value="left">左组件</option><option value="right">右组件</option></select><span id="save-dimensions">请先上传手机截图</span></label><button id="save-image" type="button" class="button primary" disabled><span aria-hidden="true">↓</span> 保存图片</button></div></div>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
   <dialog id="crop-dialog"><form method="dialog"><div class="dialog-heading"><h2>调整商品图片</h2><button type="submit" class="icon-button" aria-label="关闭">×</button></div><canvas id="crop-preview" width="680" height="680" aria-label="商品裁切效果"></canvas><label>放大<input id="crop-zoom" type="range" min="1" max="3" step=".02"></label><label>左右位置<input id="crop-x" type="range" min="0" max="100"></label><label>上下位置<input id="crop-y" type="range" min="0" max="100"></label><button type="submit" class="button primary full">完成调整</button></form></dialog>
-  <script type="module" src="./app.js?v=13"></script>
+  <script type="module" src="./app.js?v=14"></script>
 </body>
 </html>

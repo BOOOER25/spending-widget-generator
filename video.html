@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>小组件视频</title><meta name="color-scheme" content="light">
-  <link rel="stylesheet" href="./video.css?v=13"><script type="module" src="./video.js?v=13"></script>
+  <link rel="stylesheet" href="./video.css?v=14"><script type="module" src="./video.js?v=14"></script>
 </head>
 <body>
   <main>
-    <nav class="mode-nav" aria-label="生成方式"><a href="./?v=13">图片小组件</a><a href="./video.html?v=13" aria-current="page">小组件视频</a></nav>
+    <nav class="mode-nav" aria-label="生成方式"><a href="./?v=14">图片小组件</a><a href="./video.html?v=14" aria-current="page">小组件视频</a></nav>
     <section class="workspace-heading"><div><p class="eyebrow">MAKE A LITTLE STORY</p><h1 id="project-title"></h1><p id="project-subtitle"></p></div><span class="project-number" id="project-number"></span></section>
     <div class="workspace">
       <section class="preview-panel" aria-label="动画预览">
@@ -22,9 +22,11 @@
         <nav class="tabs" aria-label="编辑内容"><button data-tab="scene" aria-selected="true">画面设置</button><button data-tab="orders" aria-selected="false">双方明细</button><button data-tab="assets" aria-selected="false">素材库</button></nav>
         <div id="panel-scene" class="tab-panel">
           <div class="section-label"><span>01</span><h2>设置这段视频</h2></div>
-          <p class="note">画面顶部留空，方便后续在社媒添加标题和素材。</p>
+          <p class="note">顶部标题留空，方便在社媒添加素材；整点时钟可单独开启或关闭。</p>
           <label>底部文案<input id="footer" maxlength="60"></label>
           <div class="field-grid"><label>展示单位<select id="unit"><option value="元">消费金额 · 元</option></select></label><label>视频时长（秒）<input id="duration" type="number" min="4" max="60" step="1"></label></div>
+          <label>顶部整点时钟<select id="showClock"><option value="true">开启 · 逐小时显示</option><option value="false">关闭 · 顶部留空</option></select></label>
+          <p class="note">时钟按 07:00 → 08:00 → 09:00…推进到 23:00，不跳过没有交易的小时。有更早的消费时自动提前开始。关闭时钟仍保留相同的消费播放节奏。</p>
           <div class="section-label"><span>02</span><h2>选择小组件样式</h2></div>
           <div class="field-grid"><label>左侧 / 上方组件<select data-template aria-label="左侧组件样式"><option value="small">真小组件</option><option value="fake">假小组件（原样式）</option><option value="day">今日消费对比</option><option value="month">本月消费对比</option></select></label><label>右侧 / 下方组件<select data-template aria-label="右侧组件样式"><option value="small">真小组件</option><option value="fake">假小组件（原样式）</option><option value="day">今日消费对比</option><option value="month">本月消费对比</option></select></label></div>
           <div class="field-grid"><label>左侧 / 上方组件内时间<select data-show-time aria-label="左侧组件内时间"><option value="true">显示时间</option><option value="false">隐藏时间</option></select></label><label>右侧 / 下方组件内时间<select data-show-time aria-label="右侧组件内时间"><option value="true">显示时间</option><option value="false">隐藏时间</option></select></label></div>
@@ -38,7 +40,7 @@
           <div class="section-label"><span>04</span><h2>加一点氛围</h2></div>
           <button id="upload-music">上传背景音乐</button><button id="clear-music" class="quiet">移除音乐</button><p id="music-status" class="note">未添加背景音乐，导出为无声视频。</p>
           <p class="note">音乐随视频一同导出；预览时仅播放画面。</p>
-          <details><summary>操作说明</summary><p class="note">选择小组件样式，再为双方逐笔添加图片、名称、金额、分类和消费时间。默认逐小时推进，保留空小时；当前时段仅在网页预览下方提示，不放入视频。商品和今日对比的上一条消费更新时从下方弹出。组件内时间可分别显示或隐藏。本月期初数据默认 0，只影响本月消费对比。录制时保持页面前台。</p><button id="reset" class="quiet">重新载入示例</button></details>
+          <details><summary>操作说明</summary><p class="note">选择小组件样式，再为双方逐笔添加图片、名称、金额、分类和消费时间。顶部整点时钟默认开启，逐小时推进并保留空小时，也可单独关闭；预览和导出一致。商品和今日对比的上一条消费更新时从下方弹出。组件内时间可分别显示或隐藏。本月期初数据默认 0，只影响本月消费对比。录制时保持页面前台。</p><button id="reset" class="quiet">重新载入示例</button></details>
         </div>
         <div id="panel-orders" class="tab-panel" hidden>
           <div class="section-label"><span>01</span><h2>添加多笔消费</h2></div>
