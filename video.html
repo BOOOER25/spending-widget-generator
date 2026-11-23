@@ -3,31 +3,34 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>小组件视频</title><meta name="color-scheme" content="light">
-  <link rel="stylesheet" href="./video.css?v=12"><script type="module" src="./video.js?v=12"></script>
+  <link rel="stylesheet" href="./video.css?v=13"><script type="module" src="./video.js?v=13"></script>
 </head>
 <body>
   <main>
-    <nav class="mode-nav" aria-label="生成方式"><a href="./?v=12">图片小组件</a><a href="./video.html?v=12" aria-current="page">小组件视频</a></nav>
+    <nav class="mode-nav" aria-label="生成方式"><a href="./?v=13">图片小组件</a><a href="./video.html?v=13" aria-current="page">小组件视频</a></nav>
     <section class="workspace-heading"><div><p class="eyebrow">MAKE A LITTLE STORY</p><h1 id="project-title"></h1><p id="project-subtitle"></p></div><span class="project-number" id="project-number"></span></section>
     <div class="workspace">
       <section class="preview-panel" aria-label="动画预览">
         <div class="panel-title"><span><i class="dot"></i> 实时预览</span><span>9 : 16</span></div>
         <div class="canvas-wrap"><canvas id="preview" width="1080" height="1920" role="img" aria-label="小组件随消费时间更新的动画画面"></canvas><div id="record-badge" hidden>● 正在录制</div></div>
         <div class="transport"><button id="play" class="play-button" aria-label="播放动画">▶</button><input id="seek" type="range" min="0" max="15" step=".01" aria-label="预览进度"><output id="clock">0.0 / 15.0 s</output></div>
+        <p id="hour-status" class="note" aria-live="off"></p>
         <div class="preview-actions"><button id="save-png">保存当前画面</button><button id="save-receipt" hidden>保存完整小票</button><select id="resolution" aria-label="录制分辨率"><option value="720">720p</option><option value="1080">1080p</option></select><button id="record" class="primary">录制视频</button><button id="cancel-record" hidden>取消录制</button></div>
         <p id="record-help" class="note"></p><div id="video-result" hidden><video id="result-player" controls playsinline></video><a id="video-download" class="download-link">下载录制视频</a></div>
       </section>
       <section class="editor-panel" aria-label="内容配置">
         <nav class="tabs" aria-label="编辑内容"><button data-tab="scene" aria-selected="true">画面设置</button><button data-tab="orders" aria-selected="false">双方明细</button><button data-tab="assets" aria-selected="false">素材库</button></nav>
         <div id="panel-scene" class="tab-panel">
-          <div class="section-label"><span>01</span><h2>先写下这段故事</h2></div>
-          <label>画面标题<input id="title" maxlength="48"></label><label>底部文案<input id="footer" maxlength="60"></label>
+          <div class="section-label"><span>01</span><h2>设置这段视频</h2></div>
+          <p class="note">画面顶部留空，方便后续在社媒添加标题和素材。</p>
+          <label>底部文案<input id="footer" maxlength="60"></label>
           <div class="field-grid"><label>展示单位<select id="unit"><option value="元">消费金额 · 元</option></select></label><label>视频时长（秒）<input id="duration" type="number" min="4" max="60" step="1"></label></div>
           <div class="section-label"><span>02</span><h2>选择小组件样式</h2></div>
           <div class="field-grid"><label>左侧 / 上方组件<select data-template aria-label="左侧组件样式"><option value="small">真小组件</option><option value="fake">假小组件（原样式）</option><option value="day">今日消费对比</option><option value="month">本月消费对比</option></select></label><label>右侧 / 下方组件<select data-template aria-label="右侧组件样式"><option value="small">真小组件</option><option value="fake">假小组件（原样式）</option><option value="day">今日消费对比</option><option value="month">本月消费对比</option></select></label></div>
+          <div class="field-grid"><label>左侧 / 上方组件内时间<select data-show-time aria-label="左侧组件内时间"><option value="true">显示时间</option><option value="false">隐藏时间</option></select></label><label>右侧 / 下方组件内时间<select data-show-time aria-label="右侧组件内时间"><option value="true">显示时间</option><option value="false">隐藏时间</option></select></label></div>
           <p id="template-status" class="note" role="status">正在准备小组件样式…</p><button id="template-retry" hidden>重新加载样式</button>
-          <div class="field-grid"><label>时间轴安排<select id="timelineMode"><option value="clock">按消费时间自动安排（推荐）</option><option value="manual">手动填写出现秒数</option></select></label><label>商品展示方式<select id="imageMode"><option value="photo">保留原图</option><option value="cutout">透明贴纸（选择已抠图素材）</option></select></label></div>
-          <p class="note">小型组件左右展示，中型组件保持原比例分行展示。两个人的消费汇总在中组件里。透明贴纸请先在素材库完成抠图。</p>
+          <div class="field-grid"><label>时间轴安排<select id="timelineMode"><option value="clock">逐小时推进，保留空小时（推荐）</option><option value="manual">手动填写出现秒数</option></select></label><label>商品展示方式<select id="imageMode"><option value="photo">保留原图</option><option value="cutout">透明贴纸（选择已抠图素材）</option></select></label></div>
+          <p class="note">默认从 07:00 逐小时推进到 23:00；有更早的消费时自动提前开始。空小时照常经过，同一小时内按消费时间依次更新。小型组件左右展示，中型组件按原比例分行展示。时间开关只影响画面展示，不影响消费排序。</p>
           <label>背景配色<select id="theme"><option value="pink">草莓格纹</option><option value="mint">薄荷手账</option><option value="lilac">香芋小票</option></select></label>
           <div class="upload-row"><button id="upload-bg">上传自定义背景</button><button id="clear-bg" class="quiet">恢复配色背景</button></div>
           <div class="section-label"><span>03</span><h2>双方信息与月初数据</h2></div>
@@ -35,7 +38,7 @@
           <div class="section-label"><span>04</span><h2>加一点氛围</h2></div>
           <button id="upload-music">上传背景音乐</button><button id="clear-music" class="quiet">移除音乐</button><p id="music-status" class="note">未添加背景音乐，导出为无声视频。</p>
           <p class="note">音乐随视频一同导出；预览时仅播放画面。</p>
-          <details><summary>操作说明</summary><p class="note">选择小组件样式，再为双方逐笔添加图片、名称、金额、分类和消费时间。默认按消费时间自动安排，顶部时钟与组件数据同步；需要微调时切换手动秒数。本月期初数据默认 0，只影响本月消费对比。录制时保持页面前台。</p><button id="reset" class="quiet">重新载入示例</button></details>
+          <details><summary>操作说明</summary><p class="note">选择小组件样式，再为双方逐笔添加图片、名称、金额、分类和消费时间。默认逐小时推进，保留空小时；当前时段仅在网页预览下方提示，不放入视频。商品和今日对比的上一条消费更新时从下方弹出。组件内时间可分别显示或隐藏。本月期初数据默认 0，只影响本月消费对比。录制时保持页面前台。</p><button id="reset" class="quiet">重新载入示例</button></details>
         </div>
         <div id="panel-orders" class="tab-panel" hidden>
           <div class="section-label"><span>01</span><h2>添加多笔消费</h2></div>
