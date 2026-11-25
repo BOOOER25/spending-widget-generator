@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>小组件视频</title><meta name="color-scheme" content="light">
-  <link rel="stylesheet" href="./video.css?v=14"><script type="module" src="./video.js?v=14"></script>
+  <link rel="stylesheet" href="./video.css?v=15"><script type="module" src="./video.js?v=15"></script>
 </head>
 <body>
   <main>
-    <nav class="mode-nav" aria-label="生成方式"><a href="./?v=14">图片小组件</a><a href="./video.html?v=14" aria-current="page">小组件视频</a></nav>
+    <nav class="mode-nav" aria-label="生成方式"><a href="./?v=15">图片小组件</a><a href="./video.html?v=15" aria-current="page">小组件视频</a></nav>
     <section class="workspace-heading"><div><p class="eyebrow">MAKE A LITTLE STORY</p><h1 id="project-title"></h1><p id="project-subtitle"></p></div><span class="project-number" id="project-number"></span></section>
     <div class="workspace">
       <section class="preview-panel" aria-label="动画预览">
@@ -30,6 +30,19 @@
           <div class="section-label"><span>02</span><h2>选择小组件样式</h2></div>
           <div class="field-grid"><label>左侧 / 上方组件<select data-template aria-label="左侧组件样式"><option value="small">真小组件</option><option value="fake">假小组件（原样式）</option><option value="day">今日消费对比</option><option value="month">本月消费对比</option></select></label><label>右侧 / 下方组件<select data-template aria-label="右侧组件样式"><option value="small">真小组件</option><option value="fake">假小组件（原样式）</option><option value="day">今日消费对比</option><option value="month">本月消费对比</option></select></label></div>
           <div class="field-grid"><label>左侧 / 上方组件内时间<select data-show-time aria-label="左侧组件内时间"><option value="true">显示时间</option><option value="false">隐藏时间</option></select></label><label>右侧 / 下方组件内时间<select data-show-time aria-label="右侧组件内时间"><option value="true">显示时间</option><option value="false">隐藏时间</option></select></label></div>
+          <div class="field-grid widget-style-grid">
+            <fieldset class="widget-style" data-widget-style="0"><legend>左侧 / 上方组件外观</legend>
+              <label>圆角 <output>12%</output><input data-style-corner type="range" min="0" max="25" step="1" aria-label="左侧组件圆角"></label>
+              <label>外底<select data-style-transparent aria-label="左侧组件外底"><option value="false">指定颜色</option><option value="true">透明</option></select></label>
+              <label>外底颜色<span class="style-color-row"><input data-style-color type="color" aria-label="左侧组件外底颜色"><input data-style-hex type="text" maxlength="7" spellcheck="false" aria-label="左侧组件颜色色值" placeholder="#FFDC67"></span></label>
+            </fieldset>
+            <fieldset class="widget-style" data-widget-style="1"><legend>右侧 / 下方组件外观</legend>
+              <label>圆角 <output>12%</output><input data-style-corner type="range" min="0" max="25" step="1" aria-label="右侧组件圆角"></label>
+              <label>外底<select data-style-transparent aria-label="右侧组件外底"><option value="false">指定颜色</option><option value="true">透明</option></select></label>
+              <label>外底颜色<span class="style-color-row"><input data-style-color type="color" aria-label="右侧组件外底颜色"><input data-style-hex type="text" maxlength="7" spellcheck="false" aria-label="右侧组件颜色色值" placeholder="#B7E8D4"></span></label>
+            </fieldset>
+          </div>
+          <p class="note">左右外观可独立配置，适用于小型和中型组件。圆角 0% 为直角；外底设为透明时，保留组件插画边框和内容。配置会自动保存，预览、图片和视频导出一致。</p>
           <p id="template-status" class="note" role="status">正在准备小组件样式…</p><button id="template-retry" hidden>重新加载样式</button>
           <div class="field-grid"><label>时间轴安排<select id="timelineMode"><option value="clock">逐小时推进，保留空小时（推荐）</option><option value="manual">手动填写出现秒数</option></select></label><label>商品展示方式<select id="imageMode"><option value="photo">保留原图</option><option value="cutout">透明贴纸（选择已抠图素材）</option></select></label></div>
           <p class="note">默认从 07:00 逐小时推进到 23:00；有更早的消费时自动提前开始。空小时照常经过，同一小时内按消费时间依次更新。小型组件左右展示，中型组件按原比例分行展示。时间开关只影响画面展示，不影响消费排序。</p>
